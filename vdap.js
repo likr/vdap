@@ -4,21 +4,20 @@
 const parser = require('./lib/parser');
 const xdr = require('./lib/xdr');
 
-const getBuffer = (data) => {
-  const b = new Array(data.length);
-  for (let i = 0; i < data.length; ++i) {
-    b[i] = data.charCodeAt(i) & 0xff;
-  }
-  return b;
-};
-
 exports.loadData = (url, init) => {
   return window.fetch(url, init)
-    .then((response) => response.text())
-    .then((dods) => {
-      const pos = dods.indexOf('\nData:\n');
-      const dds = dods.substr(0, pos);
-      dods = getBuffer(dods.substr(pos + 7));
+    .then((response) => response.arrayBuffer())
+    .then((buffer) => {
+      const bytes = new Uint8Array(buffer);
+      let header = '';
+      for (const byte of bytes) {
+        header += String.fromCharCode(byte);
+        if (header.endsWith('\nData:\n')) {
+          break;
+        }
+      }
+      const dds = header.substr(0, header.length - 7);
+      const dods = bytes.slice(header.length);
       const dapvar = new parser.ddsParser(dds).parse();
       return new xdr.dapUnpacker(dods, dapvar).getValue();
     });
