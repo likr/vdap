@@ -1,0 +1,19 @@
+{
+  "name": "vdap",
+  "version": "0.1.0",
+  "description": "An OPeNDAP client for JavaScript",
+  "main": "vdap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/likr/vdap.git"
+  },
+  "author": "Yosuke Onoue <onoue@likr-lab.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/likr/vdap/issues"
+  },
+  "homepage": "https://github.com/likr/vdap"
+}
