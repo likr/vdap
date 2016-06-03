@@ -17,7 +17,7 @@ exports.loadData = (url, init) => {
         }
       }
       const dds = header.substr(0, header.length - 7);
-      const dods = bytes.slice(header.length);
+      const dods = new DataView(buffer, header.length);
       const dapvar = new parser.ddsParser(dds).parse();
       return new xdr.dapUnpacker(dods, dapvar).getValue();
     });
