@@ -1,6 +1,6 @@
 {
   "name": "vdap",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An OPeNDAP client for JavaScript",
   "main": "vdap.js",
   "scripts": {
